@@ -1,0 +1,36 @@
+.menu-container {
+    background-color: white;
+    width: 304px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-list {
+    width: 100%;
+}
+
+.menu-item {
+    width: 100%;
+    background-color: #a48fba;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item.selected {
+    background-color: #967bb6;
+}
+
+.menu-item:hover {
+    background-color: #7b5d8c;
+}
+
+.menu-logo {
+    width: 100px;
+    margin-bottom: 20px;
+}

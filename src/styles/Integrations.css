@@ -1,0 +1,26 @@
+.integrations-content {
+    padding: 20px;
+}
+
+.flex-column-container-integration {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 50px auto auto; /* Set specific widths to each column */
+    gap: 15px;
+    align-items: center;
+    justify-items: start; /* Align content to the left within the grid cells */
+}
+
+.grid-container > div {
+    display: flex;
+    align-items: center; /* Align content vertically in each column */
+}
+
+.name-cell {
+    min-width: 100px; /* Set a minimum width for the cells containing the integration names */
+}

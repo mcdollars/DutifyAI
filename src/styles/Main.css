@@ -1,0 +1,65 @@
+body {
+}
+
+.main-container {
+    background-color: #f5f0f8;
+    height: 100%;
+}
+
+.flex-base {
+    display: flex;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.processed-sign {
+    width: 2vw;
+    height: 1vw;
+    background-color: #4eab4e;
+    border-radius: 0.6vh;
+    font-size: 1.2vh;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.not-processed-sign {
+    background-color: #d2433d;
+    width: 3.8vw;
+    height: 1vw;
+    border-radius: 0.6vh;
+    font-size: 1.2vh;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-header {
+    background-color: #dec6de;
+}
+
+.ant-collapse-content-box {
+    background-color: #f8f8f8;
+}
+
+.integration-container {
+    margin-top: 5vh;
+}
+
+.integration-image {
+    width: 10vh;
+    height: 10vh;
+    cursor: pointer;
+}

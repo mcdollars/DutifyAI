@@ -1,0 +1,22 @@
+.calls-content {
+    /* Add any styles for the Calls component here */
+}
+
+.changed-task-container {
+    margin-bottom: 1vh;
+}
+
+.changed-task-container .ant-card {
+    border: 1px solid #cbc9c9;
+}
+
+.task-new-bage {
+    text-align: center;
+    background-color: #e2ccfa;
+    width: 2.2vw;
+    border-radius: 0.4vh;
+}
+
+.panel-header-container {
+    display: flex;
+}

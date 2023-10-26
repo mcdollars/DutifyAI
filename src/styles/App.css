@@ -1,0 +1,30 @@
+@font-face {
+    font-family: "Mona Sans";   /*Can be any text*/
+    src:  url("./font/Mona-Sans.ttf") format("truetype");
+  }
+
+* {
+    box-sizing: border-box;
+}
+
+.app-root {
+    background-color: white; /* Light Purple color */
+    font-family: "Mona Sans";
+    min-height: 100vh;
+}
+
+.app-drawer {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.app-drawer .MuiPaper-root {
+    width: 250px;
+    background-color: #e6d6e9;
+}
+
+.app-content {
+    padding: 20px;
+    margin-left: 250px;
+}
+

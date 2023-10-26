@@ -1,0 +1,72 @@
+# Template docker-push
+
+# This template allows you to build and push your docker image to a Docker Hub account.
+# The workflow allows running tests, code linting and security scans on feature branches (as well as master).
+# The docker image will be validated and pushed to the docker registry after the code is merged to master.
+
+# Prerequisites: $DOCKERHUB_USERNAME, $DOCKERHUB_PASSWORD setup as deployment variables
+
+image: atlassian/default-image:3
+options:
+  docker: true
+  size: 2x
+definitions:
+  services:
+    docker:
+      memory: 4096
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - IMAGE_NAME=zoom-app
+              - export DOCKER_BUILDKIT=1
+              - docker build . --file dutify-frontend-nginx.Dockerfile --tag ${IMAGE_NAME}
+            services:
+              - docker
+            caches:
+              - docker
+        - step:
+            name: Lint the Dockerfile
+            image: hadolint/hadolint:latest-debian
+            script:
+              - hadolint dutify-frontend-nginx.Dockerfile
+  branches:
+    master:
+      - step:
+          name: Build and Test
+          script:
+            - IMAGE_NAME=dutify-frontend
+            - export DOCKER_BUILDKIT=1
+            - docker build . --file dutify-frontend-nginx.Dockerfile --tag ${IMAGE_NAME}
+            - docker save ${IMAGE_NAME} --output "${IMAGE_NAME}.tar"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "*.tar"
+      - step:
+          name: Deploy to Production
+          deployment: Production
+          script:
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+            - IMAGE_NAME=dutify-frontend
+            - docker load --input "${IMAGE_NAME}.tar"
+            - VERSION="prod-0.1.${BITBUCKET_BUILD_NUMBER}"
+            - IMAGE=${DOCKERHUB_NAMESPACE}/${IMAGE_NAME}
+            - docker tag "${IMAGE_NAME}" "${IMAGE}:${VERSION}"
+            - docker push "${IMAGE}:${VERSION}"
+          services:
+            - docker
+      - step:
+          name: "Push commit to k8s repository"
+          script:
+            - git clone https://x-token-auth:$ACCESSTOKEN@bitbucket.org/chatgpttests/k8s.git
+            - cd k8s
+            - sed -i "s+darktw1nk/dutify-frontend.*+darktw1nk/dutify-frontend:prod-0.1.${BITBUCKET_BUILD_NUMBER}+g" application/dutify-frontend.yaml
+            - git config user.email ci-bot-commit@bots.bitbucket.org
+            - git add -A
+            - git commit -m 'Bitbucket Pipelines Update dutify-frontend with New Image Version'
+            - git push
