@@ -26,7 +26,7 @@ const Signed: React.FC = () => {
                     <img src={DutifyMark} alt="Logo" className="login-logo" />
                 </Box>
                 <Box sx={{ width: '100%' }} display='flex' alignItems='center' flexDirection='column'>
-                    <Typography className="login-header">Thanks for signing up!</Typography>
+                    <Typography variant='h3'>Thanks for signing up!</Typography>
                     <Box sx={{ display: 'flex' }}>
                         <Typography variant='body1' sx={{
                             color: 'rgba(24, 28, 48, 0.48)'

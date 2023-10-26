@@ -23,8 +23,14 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu }) => {
           <img src={Avatar} />
           <Typography variant='body1' ml={0.5}>Username</Typography>
         </Box>
-        <Typography variant='h6' onClick={() => onMenuClick('Calls')} >Calls</Typography>
-        <Typography variant='h6' onClick={() => onMenuClick('Integrations')}>Integrations</Typography>
+        <Typography variant='h6'
+          color={selectedMenu === 'Calls' ? "primary.main" : ''}
+          sx={{ cursor: 'pointer' }}
+          onClick={() => onMenuClick('Calls')} >Calls</Typography>
+        <Typography variant='h6'
+          color={selectedMenu === 'Integrations' ? "primary.main" : ''}
+          sx={{ cursor: 'pointer' }}
+          onClick={() => onMenuClick('Integrations')}>Integrations</Typography>
       </Box>
     </Box>
   );

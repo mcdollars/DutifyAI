@@ -10,10 +10,11 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 50px auto auto; /* Set specific widths to each column */
+    grid-template-columns: 16px auto auto; /* Set specific widths to each column */
     gap: 15px;
     align-items: center;
     justify-items: start; /* Align content to the left within the grid cells */
+    margin-bottom: 24px;
 }
 
 .grid-container > div {
@@ -22,5 +23,18 @@
 }
 
 .name-cell {
-    min-width: 100px; /* Set a minimum width for the cells containing the integration names */
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 8px;
+    min-width: 190px; /* Set a minimum width for the cells containing the integration names */
+}
+
+.category-title {
+    color: rgba(24, 28, 48, 0.48);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 20px;
 }

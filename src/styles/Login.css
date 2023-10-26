@@ -29,15 +29,6 @@
     margin-bottom: 10px;
 }
 
-.login-header {
-    font-family: Mona Sans !important;
-    font-size: 28px !important;
-    font-weight: 600 !important;
-    line-height: 32px !important;
-    letter-spacing: -0.01em !important;
-    text-align: center !important;
-    
-}
 
 @keyframes shake {
     0%, 100% {

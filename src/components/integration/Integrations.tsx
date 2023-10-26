@@ -1,90 +1,79 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Button} from '@mui/material';
+import React from 'react';
+import CustomIntegration from './Integration';
+import clickupLogo from "../../images/clickup.svg";
+import jiraLogo from "../../images/jira.svg";
+import asanaLogo from "../../images/Asana.svg";
+import trelloLogo from "../../images/trello.svg";
+import calendarLogo from "../../images/calendar.svg";
+import emailLogo from "../../images/email.svg";
+import slackLogo from "../../images/slack.svg";
+import confluenceLogo from "../../images/confluence.svg";
+import notionLogo from "../../images/notion.svg";
+import googleLogo from "../../images/google.svg";
 import '../../styles/Integrations.css';
-import clickupLogo from "../../images/clickup.png";
-import jiraLogo from "../../images/jira.png";
-import EndPointProvider from "../../util/EndPointProvider";
-import AuthContext from "../../store/AuthStore";
-import axios from 'axios';
-import {Integration} from "../../enum/Integration";
-
-type UserIntegration = {
-    integrationSystem: string,
-    accessToken: string
-}
+import { Box, Typography } from '@mui/material';
 
 const Integrations: React.FC = () => {
-    const authStore = useContext(AuthContext);
-    const endpoint: string = EndPointProvider.getEndPoint() + "/user/integration";
-    const [integrations, setIntegrations] = useState<UserIntegration[]>([]);
 
-    useEffect(() => {
-        const fetchUserIntegrations = async () => {
-            try {
-                const response = await axios.get(endpoint, {
-                    headers: {
-                        Authorization: `Bearer ${authStore.token}`
-                    }
-                });
-                setIntegrations(response.data);
-            } catch (error) {
-                console.error("Error fetching user integrations:", error);
-            }
-        };
-        fetchUserIntegrations();
-    }, [authStore.token, endpoint]);
+	const onClickUpConnect = () => {
+		const clientId = "PUF01QPJUCHBJEHZ4XHDSTJ14WEHX839";
+		let redirectUri = '';
+		if (process.env.REACT_APP_LOCAL_START) {
+			redirectUri = "http://localhost:3000";
+		} else {
+			redirectUri = "https://dutify.ai/hub";
+		}
+		window.location.replace(`https://app.clickup.com/api?client_id=${clientId}&redirect_uri=${redirectUri}`)
+		console.log("I am here-------------------------------")
+	}
 
-    const isConnected = (integration: string) => {
-        return integrations.find(userIntegration => userIntegration.integrationSystem === integration) !== undefined;
-    }
+	const onJiraConnect = () => { }
+	const onAsanaConnect = () => { }
+	const onTrelloConnect = () => { }
+	const onCalendarConnect = () => { }
+	const onEmailConnect = () => { }
+	const onSlackConnect = () => { }
+	const onConfluenceConnect = () => { }
+	const onNotionConnect = () => { }
+	const onGoogleConnect = () => { }
 
-    let onClickUpConnect = () => {
-        let clientId = "PUF01QPJUCHBJEHZ4XHDSTJ14WEHX839";
-        let redirectUri = '';
-        if (process.env.REACT_APP_LOCAL_START) {
-            redirectUri = "http://localhost:3000";
-        } else {
-            redirectUri = "https://dutify.ai/hub";
-        }
-        window.location.replace(`https://app.clickup.com/api?client_id=${clientId}&redirect_uri=${redirectUri}`)
-    }
-
-    let onJiraConnect = () => {
-
-    }
-
-    return (
-        <div className="integrations-content">
-            <h2>Integrations</h2>
-            <div className={"flex-column-container-integration"}>
-                <div><h3>Task Systems</h3></div>
-                <div className={"grid-container"}>
-                    <div>
-                        <img src={clickupLogo} alt={"clickup logo"} style={{width: '50px', height: '50px'}}/>
-                    </div>
-                    <div className={"name-cell"}>ClickUp</div>
-                    <div>
-                        {!isConnected(Integration.ClickUp) ?
-                            <Button variant="contained" color="primary" onClick={onClickUpConnect}>
-                                Connect
-                            </Button> : ''}
-                    </div>
-                </div>
-                <div className={"grid-container"}>
-                    <div>
-                        <img src={jiraLogo} alt={"jira logo"} style={{width: '50px', height: '50px'}}/>
-                    </div>
-                    <div className={"name-cell"}>Jira</div>
-                    <div>
-                        {!isConnected(Integration.Jira) ?
-                            <Button variant="contained" color="primary" onClick={onJiraConnect}>
-                                Connect
-                            </Button> : ''}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<div className="integrations-content">
+			<h2 style={{ marginTop: "47px" }}>Integrations</h2>
+			<Box width={320} display='flex' flexDirection='column' gap={6}>
+				<Box display='flex' flexDirection='column' gap={2.5}>
+					<Typography variant='body1' sx={{
+						color: 'rgba(24, 28, 48, 0.48)'
+					}}>Task Systems</Typography>
+					<CustomIntegration imgSrc={clickupLogo} integrationName="ClickUp" clickFunc={onClickUpConnect} />
+					<CustomIntegration imgSrc={jiraLogo} integrationName="Jira" clickFunc={onJiraConnect} />
+					<CustomIntegration imgSrc={asanaLogo} integrationName="Asana" clickFunc={onAsanaConnect} />
+					<CustomIntegration imgSrc={trelloLogo} integrationName="Trello" clickFunc={onTrelloConnect} />
+				</Box>
+				<Box display='flex' flexDirection='column' gap={2.5}>
+					<Typography variant='body1' sx={{
+						color: 'rgba(24, 28, 48, 0.48)'
+					}}>Calendar</Typography>
+					<CustomIntegration imgSrc={calendarLogo} integrationName="Calendar" clickFunc={onCalendarConnect} />
+				</Box>
+				<Box display='flex' flexDirection='column' gap={2.5}>
+					<Typography variant='body1' sx={{
+						color: 'rgba(24, 28, 48, 0.48)'
+					}}>Communications</Typography>
+					<CustomIntegration imgSrc={emailLogo} integrationName="Email" clickFunc={onEmailConnect} />
+					<CustomIntegration imgSrc={slackLogo} integrationName="Slack" clickFunc={onSlackConnect} />
+				</Box>
+				<Box display='flex' flexDirection='column' gap={2.5}>
+					<Typography variant='body1' sx={{
+						color: 'rgba(24, 28, 48, 0.48)'
+					}}>Knowledge Base</Typography>
+					<CustomIntegration imgSrc={confluenceLogo} integrationName="Confluence" clickFunc={onConfluenceConnect} />
+					<CustomIntegration imgSrc={notionLogo} integrationName="Notion" clickFunc={onNotionConnect} />
+					<CustomIntegration imgSrc={googleLogo} integrationName="Google" clickFunc={onGoogleConnect} />
+				</Box>
+			</Box>
+		</div>
+	);
 }
 
 export default Integrations;
