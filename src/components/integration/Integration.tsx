@@ -41,20 +41,12 @@ const CustomIntegration: React.FC<CustomIntegrationProps> = ({ imgSrc, integrati
   const isConnected = (integration: string) => {
     return integrations.find(userIntegration => userIntegration.integrationSystem === integration) !== undefined;
   }
-  const greenCSS = {
-    color: '#2ACB57',
-    backgroundColor: 'rgba(42, 203, 87, 0.16)',
-  }
-  const blueCSS = {
-    color: '#31B1E8',
-    backgroundColor: 'rgba(49, 177, 232, 0.16)'
-  }
   return (
     <Box display='flex' justifyContent='space-between'>
       <Box display='flex' alignItems='center'>
         <img src={imgSrc} alt={"logo"} />
         <Box className={"name-cell"}>{integrationName}</Box>
-      </Box>
+      </Box> 
       <Box>
         {isConnected(integrationName)
           ? <Button variant="contained" color="primary" onClick={() => clickFunc()} sx={{

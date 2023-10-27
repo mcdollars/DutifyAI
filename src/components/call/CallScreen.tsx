@@ -20,20 +20,30 @@ interface PanelHeaderProps {
 const PanelHeader: React.FC<PanelHeaderProps> = ({ userZoomCall }) => {
   let recording = userZoomCall.zoomCall.recordings[0];
   return (
-    <div style={{
+    <Box sx={{
       height: 24,
       display: 'flex'
     }}>
-      <div style={{ marginLeft: 4 }}>
-        {TimeUtil.dateToTime(new Date((recording as any).createdAt))}
-      </div>
-      <div style={{ marginLeft: 4 }}>
-        {TimeUtil.dateToYMD(new Date((recording as any).createdAt))}
-      </div>
-      <div style={{ marginLeft: "3vh" }}>
-        {(recording as any).referenceV4}
-      </div>
-    </div>
+      <Box ml={0.5} width={32} display='flex' alignItems='center'>
+        <Typography variant="body1" sx={{
+          fontWeight: 600
+        }}>
+          {TimeUtil.dateToTime(new Date((recording as any).createdAt))}
+        </Typography>
+      </Box>
+      <Box ml={0.5} width={64} display='flex' alignItems='center'>
+        <Typography variant="body1">
+          {TimeUtil.dateToYMD(new Date((recording as any).createdAt))}
+        </Typography>
+      </Box>
+      <Box ml={2}>
+        <Typography variant="body2" sx={{
+          fontWeight: 600
+        }}>
+          {(recording as any).referenceV4}
+        </Typography>
+      </Box>
+    </Box>
   )
 }
 
@@ -70,9 +80,9 @@ export default function CallScreen() {
       }} key={"" + (userZoomCall as any).id}
         header={<PanelHeader userZoomCall={userZoomCall} />}
         extra={<ProcessedSign processed={((userZoomCall as any).zoomCall.recordings[0] as any).processed} />}>
-        <div>
+        <Box>
           <UserZoomCallData userZoomCall={userZoomCall} />
-        </div>
+        </Box>
       </Collapse.Panel>)
 
 
