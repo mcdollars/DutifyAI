@@ -1,9 +1,8 @@
 .menu-container {
-    background-color: white;
-    width: 304px;
-    min-height: 100vh;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
+
 }
 
 .menu-list {

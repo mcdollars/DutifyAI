@@ -18,6 +18,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: 'rgba(185, 121, 249, 1)', // Light Purple color
+      light: 'rgba(185, 121, 249, 0.83)'
     },
     secondary: {
       main: '#e6d6e9', // Another color in your gamma
@@ -42,7 +43,8 @@ const theme = createTheme({
       fontWeight: 600
     },
     h6: {
-      fontSize: '18px'
+      fontSize: '18px',
+      fontWeight: 600
     }
   },
 });

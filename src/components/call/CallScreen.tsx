@@ -14,29 +14,32 @@ import "../../styles/Calls.css";
 import { Box, Typography } from "@mui/material";
 
 interface PanelHeaderProps {
-  userZoomCall: any
+  userZoomCall: any,
+  isMobile: boolean
 }
 
-const PanelHeader: React.FC<PanelHeaderProps> = ({ userZoomCall }) => {
+const PanelHeader: React.FC<PanelHeaderProps> = ({ userZoomCall, isMobile }) => {
   let recording = userZoomCall.zoomCall.recordings[0];
   return (
     <Box sx={{
-      height: 24,
-      display: 'flex'
-    }}>
-      <Box ml={0.5} width={32} display='flex' alignItems='center'>
-        <Typography variant="body1" sx={{
-          fontWeight: 600
-        }}>
-          {TimeUtil.dateToTime(new Date((recording as any).createdAt))}
-        </Typography>
+      display: 'flex',
+      flexDirection: isMobile ? 'column-reverse' : 'row',
+    }} ml={0.5}>
+      <Box display='flex' alignItems='center' mr={2}>
+        <Box width={32} display='flex' alignItems='center'>
+          <Typography variant="body1" sx={{
+            fontWeight: 600
+          }}>
+            {TimeUtil.dateToTime(new Date((recording as any).createdAt))}
+          </Typography>
+        </Box>
+        <Box ml={0.5} width={64} display='flex' alignItems='center'>
+          <Typography variant="body1">
+            {TimeUtil.dateToYMD(new Date((recording as any).createdAt))}
+          </Typography>
+        </Box>
       </Box>
-      <Box ml={0.5} width={64} display='flex' alignItems='center'>
-        <Typography variant="body1">
-          {TimeUtil.dateToYMD(new Date((recording as any).createdAt))}
-        </Typography>
-      </Box>
-      <Box ml={2}>
+      <Box display='flex' alignItems='center'>
         <Typography variant="body2" sx={{
           fontWeight: 600
         }}>
@@ -47,7 +50,13 @@ const PanelHeader: React.FC<PanelHeaderProps> = ({ userZoomCall }) => {
   )
 }
 
-export default function CallScreen() {
+type CallScreenProps = {
+  isMobile: boolean
+}
+
+const CallScreen: React.FC<CallScreenProps> = ({
+  isMobile
+}) => {
 
   let authStore = useContext(AuthContext);
   let [isLoaded, setIsLoaded] = useState(false);
@@ -78,7 +87,7 @@ export default function CallScreen() {
         boxShadow: '0px 2px 8px 0px rgba(24, 28, 48, 0.1)',
         borderRadius: 14,
       }} key={"" + (userZoomCall as any).id}
-        header={<PanelHeader userZoomCall={userZoomCall} />}
+        header={<PanelHeader userZoomCall={userZoomCall} isMobile={isMobile}/>}
         extra={<ProcessedSign processed={((userZoomCall as any).zoomCall.recordings[0] as any).processed} />}>
         <Box>
           <UserZoomCallData userZoomCall={userZoomCall} />
@@ -87,12 +96,12 @@ export default function CallScreen() {
 
 
   return (
-    <Box mt={10.875}>
+    <Box mt={6.875}>
       <Typography variant="h3">Your Calls</Typography>
       {isLoaded &&
         <Box sx={{
           mt: 3.125
-        }} style={{ width: "50vw", paddingBottom: "1vh" }}>
+        }} style={{ paddingBottom: "1vh" }}>
           {items.length > 0 &&
             <Collapse expandIconPosition={'start'}
               expandIcon={({ isActive }) =>
@@ -106,7 +115,6 @@ export default function CallScreen() {
                 </svg>
               </div>)}
               style={{
-                backgroundColor: "white",
                 width: "100%",
                 border: 'none',
                 display: 'flex',
@@ -128,3 +136,5 @@ export default function CallScreen() {
     </Box>
   )
 }
+
+export default CallScreen

@@ -8,7 +8,7 @@ import ClickUpContext from "../../store/ClickUpStore";
 import ClickUpService from "../../service/clickUpService";
 import Toastify from "../../util/Toastify";
 import AuthContext from "../../store/AuthStore";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export default function UserZoomCallData(props: any) {
   let userZoomCall = props.userZoomCall;
@@ -62,21 +62,20 @@ export default function UserZoomCallData(props: any) {
 
 
   return (
-    <Box>
-      <Card title={"Changed Tasks"} headStyle={headStyle}>
+    <Box display='flex' flexDirection='column' gap={3}>
+      <Box display='flex' gap={2} flexDirection='column'>
+        <Typography variant='body2' sx={{
+          fontWeight: 600
+        }}>Changed Tasks</Typography>
         {recording.changedTasks.map((task: any) => <ChangedTask key={task.id} recordingId={recording.id}
           task={task} />)}
-      </Card>
-      <br />
+      </Box>
       <AIInsightCard recording={recording} fieldName={"transcription"} split={false} showModal={showModal}
         isApplied={isTranscriptionApplied} />
-      <br />
       <AIInsightCard recording={recording} fieldName={"summary"} split={false} showModal={showModal}
         isApplied={isSummaryApplied} />
-      <br />
       <AIInsightCard recording={recording} fieldName={"keyPoints"} split={true} showModal={showModal}
         isApplied={isKeyPointsApplied} />
-      <br />
       <AIInsightCard recording={recording} fieldName={"actionItems"} split={true} showModal={showModal}
         isApplied={isActionItemsApplied} />
       <Modal title="Choose Task for Comment" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

@@ -13,7 +13,13 @@ import googleLogo from "../../images/google.svg";
 import '../../styles/Integrations.css';
 import { Box, Typography } from '@mui/material';
 
-const Integrations: React.FC = () => {
+type IntegrationsProps = {
+	isMobile: boolean
+}
+
+const Integrations: React.FC<IntegrationsProps> = ({
+	isMobile
+}) => {
 
 	const onClickUpConnect = () => {
 		const clientId = "PUF01QPJUCHBJEHZ4XHDSTJ14WEHX839";
@@ -37,11 +43,21 @@ const Integrations: React.FC = () => {
 	const onNotionConnect = () => { }
 	const onGoogleConnect = () => { }
 
+	const mobileCSS = {
+		p: '20px 16px 24px 16px',
+		bgcolor: 'white',
+		borderRadius: '14px',
+		boxShadow: '0px 2px 8px 0px rgba(24, 28, 48, 0.1)'
+	}
+
 	return (
-		<div className="integrations-content">
-			<h2 style={{ marginTop: "47px" }}>Integrations</h2>
-			<Box width={320} display='flex' flexDirection='column' gap={6}>
-				<Box display='flex' flexDirection='column' gap={2.5}>
+		<Box p={isMobile ? 2 : 4}>
+			<Typography variant='h3' sx={{
+				mt: isMobile ? '71px' : '55px',
+				mb: isMobile ? 2.5 : '37px'
+			}}>Integrations</Typography>
+			<Box width={isMobile ? '100%' : 320 } display='flex' flexDirection='column' gap={isMobile ? 1 : 6}>
+				<Box display='flex' flexDirection='column' gap={2.5} sx={isMobile ? mobileCSS : {}}>
 					<Typography variant='body1' sx={{
 						color: 'rgba(24, 28, 48, 0.48)'
 					}}>Task Systems</Typography>
@@ -50,20 +66,20 @@ const Integrations: React.FC = () => {
 					<CustomIntegration imgSrc={asanaLogo} integrationName="Asana" clickFunc={onAsanaConnect} />
 					<CustomIntegration imgSrc={trelloLogo} integrationName="Trello" clickFunc={onTrelloConnect} />
 				</Box>
-				<Box display='flex' flexDirection='column' gap={2.5}>
+				<Box display='flex' flexDirection='column' gap={2.5} sx={isMobile ? mobileCSS : {}}>
 					<Typography variant='body1' sx={{
 						color: 'rgba(24, 28, 48, 0.48)'
 					}}>Calendar</Typography>
 					<CustomIntegration imgSrc={calendarLogo} integrationName="Calendar" clickFunc={onCalendarConnect} />
 				</Box>
-				<Box display='flex' flexDirection='column' gap={2.5}>
+				<Box display='flex' flexDirection='column' gap={2.5} sx={isMobile ? mobileCSS : {}}>
 					<Typography variant='body1' sx={{
 						color: 'rgba(24, 28, 48, 0.48)'
 					}}>Communications</Typography>
 					<CustomIntegration imgSrc={emailLogo} integrationName="Email" clickFunc={onEmailConnect} />
 					<CustomIntegration imgSrc={slackLogo} integrationName="Slack" clickFunc={onSlackConnect} />
 				</Box>
-				<Box display='flex' flexDirection='column' gap={2.5}>
+				<Box display='flex' flexDirection='column' gap={2.5} sx={isMobile ? mobileCSS : {}}>
 					<Typography variant='body1' sx={{
 						color: 'rgba(24, 28, 48, 0.48)'
 					}}>Knowledge Base</Typography>
@@ -72,7 +88,7 @@ const Integrations: React.FC = () => {
 					<CustomIntegration imgSrc={googleLogo} integrationName="Google" clickFunc={onGoogleConnect} />
 				</Box>
 			</Box>
-		</div>
+		</Box>
 	);
 }
 

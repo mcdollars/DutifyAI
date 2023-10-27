@@ -1,7 +1,3 @@
-.calls-content {
-    /* Add any styles for the Calls component here */
-}
-
 .changed-task-container {
     margin-bottom: 1vh;
 }
@@ -24,7 +20,6 @@
 .ant-collapse>.ant-collapse-item>.ant-collapse-header {
     padding: 8px;
     display: flex;
-    align-items: center;
 }
 
 .ant-collapse-item > .ant-collapse-header > .ant-collapse-expand-icon {
@@ -34,4 +29,12 @@
 
 .ant-collapse-item-active > .ant-collapse-header > .ant-collapse-header-text {
     color: #B979F9;
+}
+
+.ant-collapse-content-active {
+    border: none !important;
+}
+
+.ant-collapse-content-active > .ant-collapse-content-box {
+    background-color: white;
 }
