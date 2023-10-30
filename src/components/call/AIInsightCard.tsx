@@ -31,7 +31,9 @@ export default function AIInsightCard(props: any) {
         py: 2.5,
         borderRadius: 2.5
       }} display='flex' flexDirection='column' gap={2}>
-        {split ? recording[fieldName].split("\n").map((point: any) => <li key={point}>{point}</li>) : recording[fieldName]}
+        {split ? recording[fieldName].split("\n")
+          .map((point: any, index: number) =>
+            <li key={`point-${index}`}>{point}</li>) : recording[fieldName]}
 
         <Box>
           {!isApplied &&

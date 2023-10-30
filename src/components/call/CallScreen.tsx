@@ -11,7 +11,7 @@ import TimeUtil from "../../util/TimeUtil";
 import ArrowRight from "../../images/arrowright.svg"
 import ArrowDown from "../../images/arrowdown.svg"
 import "../../styles/Calls.css";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 interface PanelHeaderProps {
   userZoomCall: any,
@@ -125,14 +125,9 @@ const CallScreen: React.FC<CallScreenProps> = ({
             </Collapse>}
         </Box>}
       {!isLoaded &&
-        <div className={"flex-column-container"}>
-          <div style={{ marginTop: "2vh" }}>
-            <strong>Loading Call Data</strong>
-          </div>
-          <div style={{ marginTop: "2vh" }}>
-            <Circles color='blue' />
-          </div>
-        </div>}
+        <Box className={"flex-column-container"}>
+          <CircularProgress />
+        </Box>}
     </Box>
   )
 }
