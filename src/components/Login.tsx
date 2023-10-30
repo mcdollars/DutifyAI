@@ -71,6 +71,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             const response = await axios.post(endpoint, { username, password });
             if (response.status === 200) {
                 const token = response.data.token;
+                console.log(response.data, "---------Success Login")
                 localStorage.setItem('authToken', token);
                 authStore.setToken(token);
                 setError(''); // Clear error message

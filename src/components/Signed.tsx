@@ -1,21 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Button, Box, Typography, Grid } from '@mui/material';
-import { BootstrapInput } from './Login';
-import axios from "axios";
-import AuthContext from "../store/AuthStore";
-import EndPointProvider from "../util/EndPointProvider";
 import DutifyMark from "../images/dutifymark.svg"
 import { useNavigate } from "react-router-dom"
 
 const Signed: React.FC = () => {
     const navigate = useNavigate()
-    const [error, setError] = useState('');
-    const [shake, setShake] = useState(false);
-    const authStore = useContext(AuthContext);
 
     return (
         <Box className="login-container">
-            <Grid flexDirection='column' className={`login-box ${shake ? 'shake' : ''}`} sx={{
+            <Grid flexDirection='column' className={`login-box`} sx={{
                 height: 288,
                 mx: 2,
                 p: 5,
@@ -34,7 +27,7 @@ const Signed: React.FC = () => {
                     </Box>
                 </Box>
                 <Box sx={{ width: '100%' }} alignItems='center' display='flex' flexDirection='column' gap={1}>
-                    <Button variant="contained" color="primary" onClick={() => {}} sx={{
+                    <Button variant="contained" color="primary" onClick={() => navigate("/login")} sx={{
                         background: 'rgba(185, 121, 249, 1)',
                         boxShadow: '0px 4px 16px 0px rgba(185, 121, 249, 0.32)',
                         borderRadius: '20px',

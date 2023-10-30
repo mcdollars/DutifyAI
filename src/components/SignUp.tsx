@@ -32,17 +32,17 @@ const SignUp: React.FC = () => {
         setPassword(e.target.value);
     };
 
-    const login = async () => {
-        let endpoint = EndPointProvider.getEndPoint() + "/auth/login";
+    const signup = async () => {
+        let endpoint = EndPointProvider.getEndPoint() + "/auth/register";
 
         try {
-            const response = await axios.post(endpoint, { username, password });
-            if (response.status === 200) {
-                const token = response.data.token;
-                localStorage.setItem('authToken', token);
-                authStore.setToken(token);
+            const response = await axios.post(endpoint, { username, password, email });
+            if (response.status === 201) {
+                // const token = response.data.token;
+                // localStorage.setItem('authToken', token);
+                // authStore.setToken(token);
                 setError(''); // Clear error message
-                // onLoginSuccess();
+                navigate('/signed')
             }
         } catch (error) {
             setError('Wrong username or password'); // Set error message
@@ -112,7 +112,7 @@ const SignUp: React.FC = () => {
                     </Box>
                 </Box>
                 <Box sx={{ width: '100%' }} alignItems='center' display='flex' flexDirection='column' gap={1}>
-                    <Button variant="contained" color="primary" onClick={login} fullWidth sx={{
+                    <Button variant="contained" color="primary" onClick={signup} fullWidth sx={{
                         background: 'rgba(185, 121, 249, 1)',
                         boxShadow: '0px 4px 16px 0px rgba(185, 121, 249, 0.32)',
                         borderRadius: '20px',

@@ -25,6 +25,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
     <Box className="menu-container" sx={{
       position: isMobile ? 'fixed' : '',
       width: isMobile ? '100%' : isSmallScreen ? 200 : 304,
+      minWidth: isMobile ? '100%' : isSmallScreen ? 200 : 304,
       px: 2,
       py: isMobile ? 2 : 3,
       transition: 'all 0.5s',

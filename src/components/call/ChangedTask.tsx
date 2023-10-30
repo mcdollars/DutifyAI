@@ -63,8 +63,8 @@ export default function ChangedTask(props: any) {
         color: '#181C30'
       }}>{task.taskTitle}</Typography>
 
-      {task.taskChanges.map((taskChange: any) =>
-        <Box display='flex' flexDirection='column' gap={0.5}>
+      {task.taskChanges.map((taskChange: any, index: number) =>
+        <Box key={`taskChange-${task.id}-${index}`} display='flex' flexDirection='column' gap={0.5}>
           <Typography variant="body1" sx={{
             color: '#181C30',
             opacity: 0.48

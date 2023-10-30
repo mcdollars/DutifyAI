@@ -111,7 +111,7 @@ const CallScreen: React.FC<CallScreenProps> = ({
                     transform: isActive ? 'rotate(90deg)' : '',
                     transition: 'all 0.2s'
                   }}>
-                  <path d="M1 1L5 5L1 9" stroke={isActive ? "#B979F9" : "#181C30"} stroke-width="1.6" stroke-linecap="round" />
+                  <path d="M1 1L5 5L1 9" stroke={isActive ? "#B979F9" : "#181C30"} strokeWidth="1.6" strokeLinecap="round" />
                 </svg>
               </div>)}
               style={{

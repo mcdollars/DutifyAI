@@ -67,7 +67,7 @@ export default function UserZoomCallData(props: any) {
         <Typography variant='body2' sx={{
           fontWeight: 600
         }}>Changed Tasks</Typography>
-        {recording.changedTasks.map((task: any) => <ChangedTask key={task.id} recordingId={recording.id}
+        {recording.changedTasks.map((task: any, index: number) => <ChangedTask key={`changedTask-${index}`} recordingId={recording.id}
           task={task} />)}
       </Box>
       <AIInsightCard recording={recording} fieldName={"transcription"} split={false} showModal={showModal}
