@@ -76,7 +76,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 authStore.setToken(token);
                 setError(''); // Clear error message
                 onLoginSuccess();
-                navigate('/home')
+                navigate('/call')
             }
         } catch (error) {
             setError('Wrong username or password'); // Set error message

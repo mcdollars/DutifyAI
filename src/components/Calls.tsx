@@ -34,6 +34,7 @@ const Calls: React.FC = () => {
     });
   }
   useEffect(() => {
+    localStorage.clear()
     requestRecordings().then(callRecordings => {
       setIsLoaded(true);
       if (userZoomCalls.length === 0 && callRecordings.data.length !== 0) {

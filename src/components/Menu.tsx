@@ -4,6 +4,7 @@ import '../styles/Menu.css';
 import DutifyMark from "../images/dutifymark.svg"
 import Avatar from "../images/avatar.svg"
 import Burger from "../images/burger.svg"
+import { useNavigate } from 'react-router-dom';
 
 interface MenuProps {
   onMenuClick: (menu: string) => void;
@@ -14,7 +15,7 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmallScreen }) => {
   const [toggle, setToggle] = useState<boolean>(false)
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (isMobile) {
       setToggle(false)
@@ -65,7 +66,10 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
                 overflow: 'hidden'
               }} className='text-wrap'>your-emailllll@gmail.com</Typography>
             <Box display='flex'>
-              <Typography variant={isMobile ? 'body2' : 'body1'}>Log out</Typography>
+              <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
+                textDecoration: 'underline',
+                cursor: 'pointer'
+              }} onClick={() => navigate("/login")}>Log out</Typography>
               <Typography variant={isMobile ? 'body2' : 'body1'}>&nbsp;→</Typography>
             </Box>
           </Box>
