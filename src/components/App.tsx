@@ -13,6 +13,8 @@ import Toastify from '../util/Toastify';
 import AuthService from "../service/authService"; // Import the static toastify class
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Signed from './Signed';
+import Calls from './Calls';
+import Integrations from './integration/Integrations';
 
 const theme = createTheme({
   palette: {
@@ -103,7 +105,7 @@ const App: React.FC = () => {
     setIsAuthenticated(true);
   };
 
-  const PrivateRoute = ({ children} : {children: any}) => {
+  const PrivateRoute = ({ children }: { children: any }) => {
     if (authStore.token) {
       return children
     }
@@ -117,7 +119,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/' element={<Login onLoginSuccess={handleLoginSuccess} />} />
           <Route path='/'>
-            <Route path="home" element={<PrivateRoute><MainContainer/></PrivateRoute>} />
+            <Route path="call" element={<PrivateRoute><Calls /></PrivateRoute>} />
+            <Route path="integration" element={<PrivateRoute><Integrations /></PrivateRoute>} />
             <Route path="login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="signed" element={<Signed />} />

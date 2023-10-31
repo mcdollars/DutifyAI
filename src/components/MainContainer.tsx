@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Box, Theme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Menu from './Menu';
-import Calls from './Calls';
-import Integrations from './integration/Integrations';
 
-const MainContainer: React.FC = () => {
+interface MainContainerProps {
+    children: React.ReactNode
+}
+
+const MainContainer: React.FC<MainContainerProps> = ({children}) => {
     const [activeMenu, setActiveMenu] = useState('Calls');
 
     const handleMenuClick = (menu: string) => {
@@ -31,9 +33,7 @@ const MainContainer: React.FC = () => {
                 minHeight: '100vh',
                 bgcolor: isMobile ? 'rgba(185, 121, 249, 0.08)' : ''
             }}>
-                {activeMenu === 'Calls'
-                    ? <Calls isSmallScreen={isSmallScreen} isMobile={isMobile} />
-                    : <Integrations isMobile={isMobile} />}
+                {children}
             </Box>
         </Box>
     );

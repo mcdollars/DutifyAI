@@ -11,6 +11,7 @@ import AuthContext from "../../store/AuthStore";
 import { Box, Typography } from "@mui/material";
 
 export default function UserZoomCallData(props: any) {
+  const { isMobile } = props
   let userZoomCall = props.userZoomCall;
   let recording = userZoomCall.zoomCall.recordings[0];
   let store = useContext(ClickUpContext);
@@ -68,7 +69,7 @@ export default function UserZoomCallData(props: any) {
           fontWeight: 600
         }}>Changed Tasks</Typography>
         {recording.changedTasks.map((task: any, index: number) => <ChangedTask key={`changedTask-${index}`} recordingId={recording.id}
-          task={task} />)}
+          task={task} isMobile={isMobile}/>)}
       </Box>
       <AIInsightCard recording={recording} fieldName={"transcription"} split={false} showModal={showModal}
         isApplied={isTranscriptionApplied} />

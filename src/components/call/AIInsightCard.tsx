@@ -33,7 +33,12 @@ export default function AIInsightCard(props: any) {
       }} display='flex' flexDirection='column' gap={2}>
         {split ? recording[fieldName].split("\n")
           .map((point: any, index: number) =>
-            <li key={`point-${index}`}>{point}</li>) : recording[fieldName]}
+            <li key={`point-${index}`}>
+              <Typography variant="body1">
+                {point}
+              </Typography>
+            </li>)
+          : <Typography variant="body1">{recording[fieldName]}</Typography>}
 
         <Box>
           {!isApplied &&

@@ -1,5 +1,4 @@
-import "../../styles/Main.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Collapse } from "antd";
 import UserZoomCallData from "./UserZoomCallData";
@@ -10,6 +9,7 @@ import AuthContext from "../../store/AuthStore";
 import TimeUtil from "../../util/TimeUtil";
 import ArrowRight from "../../images/arrowright.svg"
 import ArrowDown from "../../images/arrowdown.svg"
+import "../../styles/Main.css";
 import "../../styles/Calls.css";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
@@ -51,36 +51,18 @@ const PanelHeader: React.FC<PanelHeaderProps> = ({ userZoomCall, isMobile }) => 
 }
 
 type CallScreenProps = {
-  isMobile: boolean
+  isMobile: boolean,
+  userZoomCalls: any[],
+  isLoaded: boolean
 }
 
 const CallScreen: React.FC<CallScreenProps> = ({
-  isMobile
+  isMobile,
+  userZoomCalls,
+  isLoaded
 }) => {
 
-  let authStore = useContext(AuthContext);
-  let [isLoaded, setIsLoaded] = useState(false);
-  let [userZoomCalls, setUserZoomCalls] = useState([]);
-
-
-  async function requestRecordings() {
-    let endpoint = EndPointProvider.getEndPoint();
-    const token = authStore.token;
-    return await axios.get(endpoint + "/usercall/all", {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-  }
-
-  if (userZoomCalls.length === 0) {
-    requestRecordings().then(callRecordings => {
-      setIsLoaded(true);
-      if (userZoomCalls.length === 0 && callRecordings.data.length !== 0) {
-        setUserZoomCalls(callRecordings.data);
-      }
-    });
-  }
-
-  let items = userZoomCalls.map(recording => <UserZoomCallData key={(recording as any).id} recording={recording} />)
+  let items = userZoomCalls.map(recording => <UserZoomCallData key={(recording as any).id} recording={recording} isMobile={isMobile}/>)
   items = userZoomCalls.filter((usz: any) => usz.zoomCall.recordings.length > 0)
     .sort((a, b) => new Date((b as any).zoomCall.recordings[0].createdAt).getTime() - new Date((a as any).zoomCall.recordings[0].createdAt).getTime()).map(userZoomCall =>
       <Collapse.Panel style={{
@@ -90,7 +72,7 @@ const CallScreen: React.FC<CallScreenProps> = ({
         header={<PanelHeader userZoomCall={userZoomCall} isMobile={isMobile}/>}
         extra={<ProcessedSign processed={((userZoomCall as any).zoomCall.recordings[0] as any).processed} />}>
         <Box>
-          <UserZoomCallData userZoomCall={userZoomCall} />
+          <UserZoomCallData userZoomCall={userZoomCall} isMobile={isMobile}/>
         </Box>
       </Collapse.Panel>)
 

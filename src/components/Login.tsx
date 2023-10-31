@@ -97,9 +97,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 <Box height={24} display='flex' alignItems='center'>
                     <img src={DutifyMark} alt="Logo" className="login-logo" />
                 </Box>
-                <Box sx={{ width: '100%' }} display='flex' alignItems='center' flexDirection='column'>
+                <Box sx={{ width: '100%' }} display='flex' alignItems='center' flexDirection='column' gap={1}>
                     <Typography variant='h3'>Welcome back!</Typography>
-                    <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex' }} gap='2px'>
                         <Typography variant='body1' sx={{
                             color: 'rgba(24, 28, 48, 0.48)'
                         }}>Don’t have an account?</Typography>
@@ -115,7 +115,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                         <Typography variant='body1' sx={{
                             color: 'rgba(24, 28, 48, 0.48)',
                             mb: 0.5
-                        }}>Username</Typography>
+                        }}>
+                            Username
+                        </Typography>
                         <BootstrapInput
                             inputProps={{
                                 style: { border: error && '1px solid rgba(241, 105, 101, 1)' }
@@ -136,7 +138,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                         <Typography variant='body1' sx={{
                             color: 'rgba(241, 105, 101, 1)',
                             marginTop: 1,
-                            marginBottom: 1.5
+                            marginBottom: 1.5,
+                            height: 16
                         }}>Wrong username or password</Typography>
                     </Box>
                     <Box sx={{ width: '100%' }} alignItems='center' display='flex' flexDirection='column' gap={1}>

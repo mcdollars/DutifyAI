@@ -6,6 +6,7 @@ import "../../styles/Calls.css";
 import { Button, Box, Typography, withStyles } from "@mui/material";
 
 export default function ChangedTask(props: any) {
+  const {isMobile} = props
   let task = props.task;
   let recordingId = props.recordingId;
   let authStore = useContext(AuthContext);
@@ -21,7 +22,6 @@ export default function ChangedTask(props: any) {
     let clickupService = new ClickUpService(authStore);
     if (task.new) {
       clickupService.postNewTask(recordingId, task.id).then(data => {
-        console.log(data);
         if (data.isSuccessful) {
           Toastify.success('🦄 Succesfully Updated!');
           setCanApplyChanges(false);
@@ -51,6 +51,10 @@ export default function ChangedTask(props: any) {
 
   const isNewBage = task.new ? <div className={"task-new-bage"}>NEW</div> : '';
 
+  const toFirstLetterUpper = (str: string) => {
+    return str.slice(0, 1).toUpperCase() + str.slice(1)
+  }
+
   return (
     <Box sx={{
       background: '#B979F914',
@@ -68,7 +72,7 @@ export default function ChangedTask(props: any) {
           <Typography variant="body1" sx={{
             color: '#181C30',
             opacity: 0.48
-          }}>{taskChange.field}</Typography>
+          }}>{toFirstLetterUpper(taskChange.field)}</Typography>
           <Typography variant="body1">{taskChange.oldValue} → {taskChange.newValue}</Typography>
         </Box>
       )}
@@ -76,35 +80,35 @@ export default function ChangedTask(props: any) {
         {canApplyChanges && <Button color="primary" onClick={applyChanges}
           sx={{
             bgcolor: 'primary.main',
-            borderRadius: 3,
-            px: 2.5,
-            py: 1.25,
+            borderRadius: isMobile ? 5 : 3,
+            px: isMobile ? 4 : 2.5,
+            py: isMobile ? 2 :1.25,
             ':hover': {
               bgcolor: 'primary.light', // theme.palette.primary.main
               color: 'white',
             },
-            minHeight: 36,
-            maxHeight: 36
+            minHeight: isMobile ? 48 : 36,
+            maxHeight: isMobile ? 48 : 36
           }}
         >
-          <Typography variant="body1" color='white'>
+          <Typography variant={ isMobile ? "body2" : "body1"} color='white'>
             {task.new ? 'Create' : 'Apply Changes'}
           </Typography>
         </Button>}
         {!canApplyChanges &&
           <Button color="primary" disabled sx={{
             bgcolor: 'primary.main',
-            borderRadius: 3,
-            px: 2.5,
-            py: 1.25,
+            borderRadius: isMobile ? 5 : 3,
+            px: isMobile ? 4 : 2.5,
+            py: isMobile ? 2 :1.25,
             ':hover': {
               bgcolor: 'primary.light', // theme.palette.primary.main
               color: 'white',
             },
-            minHeight: 36,
-            maxHeight: 36
+            minHeight: isMobile ? 48 : 36,
+            maxHeight: isMobile ? 48 : 36
           }}>
-            <Typography variant="body1" color='white'>
+            <Typography variant={ isMobile ? "body2" : "body1"} color='white'>
               Applied
             </Typography>
           </Button>}

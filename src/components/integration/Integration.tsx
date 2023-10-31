@@ -1,42 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Button } from '@mui/material';
 import '../../styles/Integrations.css';
-import EndPointProvider from "../../util/EndPointProvider";
-import AuthContext from "../../store/AuthStore";
-import axios from 'axios';
+
 import Status from '../Status';
 
-type UserIntegration = {
-  integrationSystem: string,
-  accessToken: string
-}
+
 
 type CustomIntegrationProps = {
   imgSrc: string,
   integrationName: string,
-  clickFunc: Function
+  clickFunc: Function,
+  integrations: any[]
 }
 
-const CustomIntegration: React.FC<CustomIntegrationProps> = ({ imgSrc, integrationName, clickFunc }) => {
-  const authStore = useContext(AuthContext);
-  const endpoint: string = EndPointProvider.getEndPoint() + "/user/integration";
-  const [integrations, setIntegrations] = useState<UserIntegration[]>([]);
+const CustomIntegration: React.FC<CustomIntegrationProps> = ({ imgSrc, integrationName, clickFunc, integrations }) => {
 
-  useEffect(() => {
-    const fetchUserIntegrations = async () => {
-      try {
-        const response = await axios.get(endpoint, {
-          headers: {
-            Authorization: `Bearer ${authStore.token}`
-          }
-        });
-        setIntegrations(response.data);
-      } catch (error) {
-        console.error("Error fetching user integrations:", error);
-      }
-    };
-    fetchUserIntegrations();
-  }, [authStore.token, endpoint]);
 
   const isConnected = (integration: string) => {
     return integrations.find(userIntegration => userIntegration.integrationSystem === integration) !== undefined;

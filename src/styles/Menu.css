@@ -33,3 +33,7 @@
     width: 100px;
     margin-bottom: 20px;
 }
+
+.text-wrap {
+    text-wrap: nowrap;
+}
