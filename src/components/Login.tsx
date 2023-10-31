@@ -64,6 +64,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         setPassword(e.target.value);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            login()
+        }
+    }
+
     const login = async () => {
         let endpoint = EndPointProvider.getEndPoint() + "/auth/login";
 
@@ -76,6 +82,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 authStore.setToken(token);
                 setError(''); // Clear error message
                 onLoginSuccess();
+                localStorage.setItem('username', username)
                 navigate('/call')
             }
         } catch (error) {
@@ -122,7 +129,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                             inputProps={{
                                 style: { border: error && '1px solid rgba(241, 105, 101, 1)' }
                             }}
-                            fullWidth onChange={handleUsernameChange} />
+                            fullWidth onChange={handleUsernameChange} onKeyDown={(e) => handleKeyDown(e)}/>
                     </Box>
                     <Box sx={{ width: '100%' }}>
                         <Typography variant='body1' sx={{
@@ -132,7 +139,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                         <BootstrapInput type='password'
                             inputProps={{
                                 style: { border: error && '1px solid rgba(241, 105, 101, 1)' }
-                            }} fullWidth onChange={handlePasswordChange} />
+                            }} fullWidth onChange={handlePasswordChange} onKeyDown={(e) => handleKeyDown(e)}/>
                     </Box>
                     <Box display='flex' visibility={error ? 'visible' : 'hidden'} justifyContent='center'>
                         <Typography variant='body1' sx={{

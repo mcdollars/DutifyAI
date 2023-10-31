@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 import '../styles/Menu.css';
 import DutifyMark from "../images/dutifymark.svg"
-import Avatar from "../images/avatar.svg"
 import Burger from "../images/burger.svg"
 import { useNavigate } from 'react-router-dom';
+import AuthContext from "../store/AuthStore";
 
 interface MenuProps {
   onMenuClick: (menu: string) => void;
@@ -16,11 +16,19 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmallScreen }) => {
   const [toggle, setToggle] = useState<boolean>(false)
   const navigate = useNavigate()
+  const authStore = useContext(AuthContext);
+  const username = localStorage.getItem('username')
   useEffect(() => {
     if (isMobile) {
       setToggle(false)
     }
   }, [isMobile])
+
+  const handleLogOut = () => {
+    localStorage.clear()
+    authStore.removeToken()
+    navigate('/login')
+  }
 
   return (
     <Box className="menu-container" sx={{
@@ -60,27 +68,29 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
               color: "rgba(185, 121, 249, 1)"
             }}>Username</Typography>
             <Typography variant={isMobile ? 'body2' : 'body1'} maxWidth={120}
-              sx={isMobile ? {} : {
-                overflowWrap: 'break-word',
-                textOverflow: 'ellipsis',
-                overflow: 'hidden'
-              }} className='text-wrap'>your-emailllll@gmail.com</Typography>
+              sx={isMobile
+                ? { cursor: 'pointer' }
+                : {
+                  overflowWrap: 'break-word',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                }} className='text-wrap' onClick={() => { if (isMobile) handleLogOut() }}>{username}</Typography>
             <Box display='flex'>
               <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
                 textDecoration: 'underline',
                 cursor: 'pointer'
-              }} onClick={() => navigate("/login")}>Log out</Typography>
+              }} onClick={handleLogOut}>Log out</Typography>
               <Typography variant={isMobile ? 'body2' : 'body1'}>&nbsp;→</Typography>
             </Box>
           </Box>
         </Box>
         <Typography variant={isMobile ? 'h3' : 'h6'}
           color={selectedMenu === 'Calls' ? "primary.main" : ''}
-          sx={{ cursor: 'pointer', fontWeight: 600 }}
+          sx={{ cursor: 'pointer', fontWeight: 600, ml: 0.5 }}
           onClick={() => onMenuClick('Calls')} >Calls</Typography>
         <Typography variant={isMobile ? 'h3' : 'h6'}
           color={selectedMenu === 'Integrations' ? "primary.main" : ''}
-          sx={{ cursor: 'pointer' }}
+          sx={{ cursor: 'pointer', ml: 0.5 }}
           onClick={() => onMenuClick('Integrations')}>Integrations</Typography>
       </Box>}
     </Box>

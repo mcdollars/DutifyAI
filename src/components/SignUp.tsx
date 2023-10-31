@@ -64,9 +64,9 @@ const SignUp: React.FC = () => {
                 <Box height={24} display='flex' alignItems='center'>
                     <img src={DutifyMark} alt="Logo" className="login-logo" />
                 </Box>
-                <Box sx={{ width: '100%' }} display='flex' alignItems='center' flexDirection='column'>
+                <Box sx={{ width: '100%' }} display='flex' alignItems='center' flexDirection='column' gap={1}>
                     <Typography variant='h3'>Let's get started</Typography>
-                    <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex' }} gap={0.25}>
                         <Typography variant='body1' sx={{
                             color: 'rgba(24, 28, 48, 0.48)'
                         }}>Already have an account?</Typography>
@@ -77,9 +77,10 @@ const SignUp: React.FC = () => {
                         }} onClick={() => navigate('/login')}>Log in</Typography>
                     </Box>
                 </Box>
-                <Box sx={{ width: '100%' }} display='flex' flexDirection='column' >
-                    <Box sx={{ width: '100%', mb: 2 }}>
+                <Box sx={{ width: '100%' }} display='flex' flexDirection='column' gap={2}>
+                    <Box sx={{ width: '100%' }}>
                         <Typography variant='body1' sx={{
+                            height: 16,
                             color: 'rgba(24, 28, 48, 0.48)',
                             mb: 0.5
                         }}>Username</Typography>
@@ -89,8 +90,9 @@ const SignUp: React.FC = () => {
                             }}
                             fullWidth onChange={handleUsernameChange} />
                     </Box>
-                    <Box sx={{ width: '100%', mb: 2 }}>
+                    <Box sx={{ width: '100%' }}>
                         <Typography variant='body1' sx={{
+                            height: 16,
                             color: 'rgba(24, 28, 48, 0.48)',
                             mb: 0.5
                         }}>Email</Typography>
@@ -102,6 +104,7 @@ const SignUp: React.FC = () => {
                     </Box>
                     <Box sx={{ width: '100%' }}>
                         <Typography variant='body1' sx={{
+                            height: 16,
                             color: 'rgba(24, 28, 48, 0.48)',
                             mb: 0.5
                         }}>Password</Typography>

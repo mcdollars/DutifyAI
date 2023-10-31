@@ -35,7 +35,7 @@ const theme = createTheme({
       minHeight: '48px',
     },
     body1: {
-      fontSize: '12px'
+      fontSize: '12px',
     },
     body2: {
       fontSize: '14px'
@@ -46,7 +46,8 @@ const theme = createTheme({
     },
     h6: {
       fontSize: '18px',
-      fontWeight: 600
+      fontWeight: 600,
+      lineHeight: '20px'
     }
   },
 });
@@ -112,16 +113,23 @@ const App: React.FC = () => {
     return <Navigate to="/login" />
   }
 
+  const BaseRoute = ({children}: {children: any}) => {
+    if (authStore.token) {
+      return <Navigate to="/call" />
+    }
+    return children
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login onLoginSuccess={handleLoginSuccess} />} />
+          <Route path='/' element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
           <Route path='/'>
             <Route path="call" element={<PrivateRoute><Calls /></PrivateRoute>} />
             <Route path="integration" element={<PrivateRoute><Integrations /></PrivateRoute>} />
-            <Route path="login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="login" element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
             <Route path="signup" element={<SignUp />} />
             <Route path="signed" element={<Signed />} />
           </Route>
