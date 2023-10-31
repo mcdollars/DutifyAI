@@ -72,13 +72,13 @@ export default function UserZoomCallData(props: any) {
           task={task} isMobile={isMobile}/>)}
       </Box>
       <AIInsightCard recording={recording} fieldName={"transcription"} split={false} showModal={showModal}
-        isApplied={isTranscriptionApplied} />
+        isApplied={isTranscriptionApplied} isMobile={isMobile}/>
       <AIInsightCard recording={recording} fieldName={"summary"} split={false} showModal={showModal}
-        isApplied={isSummaryApplied} />
+        isApplied={isSummaryApplied} isMobile={isMobile}/>
       <AIInsightCard recording={recording} fieldName={"keyPoints"} split={true} showModal={showModal}
-        isApplied={isKeyPointsApplied} />
+        isApplied={isKeyPointsApplied}  isMobile={isMobile}/>
       <AIInsightCard recording={recording} fieldName={"actionItems"} split={true} showModal={showModal}
-        isApplied={isActionItemsApplied} />
+        isApplied={isActionItemsApplied}  isMobile={isMobile}/>
       <Modal title="Choose Task for Comment" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <ListSelectionModal />
       </Modal>

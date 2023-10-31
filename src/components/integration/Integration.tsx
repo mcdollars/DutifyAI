@@ -26,7 +26,7 @@ const CustomIntegration: React.FC<CustomIntegrationProps> = ({ imgSrc, integrati
         <Box className={"name-cell"}>{integrationName}</Box>
       </Box> 
       <Box>
-        {isConnected(integrationName)
+        {!isConnected(integrationName)
           ? <Button variant="contained" color="primary" onClick={() => clickFunc()} sx={{
             width: "99px", minHeight: "28px", height: "28px",
             borderRadius: "10px", padding: "6px, 15px, 6px, 20px",
@@ -34,9 +34,7 @@ const CustomIntegration: React.FC<CustomIntegrationProps> = ({ imgSrc, integrati
           }}>
             Connect →
           </Button>
-          : integrationName !== "Email"
-            ? <Status text='coming soon' color='blue'/>
-            : <Status text='connected' color='green'/>}
+          : <Status text='connected' color='green'/>}
       </Box>
     </Box>
   );

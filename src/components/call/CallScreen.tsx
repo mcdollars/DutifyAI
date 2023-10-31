@@ -62,19 +62,8 @@ const CallScreen: React.FC<CallScreenProps> = ({
   isLoaded
 }) => {
 
-  let items = userZoomCalls.map(recording => <UserZoomCallData key={(recording as any).id} recording={recording} isMobile={isMobile}/>)
-  items = userZoomCalls.filter((usz: any) => usz.zoomCall.recordings.length > 0)
-    .sort((a, b) => new Date((b as any).zoomCall.recordings[0].createdAt).getTime() - new Date((a as any).zoomCall.recordings[0].createdAt).getTime()).map(userZoomCall =>
-      <Collapse.Panel style={{
-        boxShadow: '0px 2px 8px 0px rgba(24, 28, 48, 0.1)',
-        borderRadius: 14,
-      }} key={"" + (userZoomCall as any).id}
-        header={<PanelHeader userZoomCall={userZoomCall} isMobile={isMobile}/>}
-        extra={<ProcessedSign processed={((userZoomCall as any).zoomCall.recordings[0] as any).processed} />}>
-        <Box>
-          <UserZoomCallData userZoomCall={userZoomCall} isMobile={isMobile}/>
-        </Box>
-      </Collapse.Panel>)
+  // let items = userZoomCalls.map(recording => <UserZoomCallData key={(recording as any).id} recording={recording} isMobile={isMobile} />)
+  // items = 
 
 
   return (
@@ -84,7 +73,7 @@ const CallScreen: React.FC<CallScreenProps> = ({
         <Box sx={{
           mt: 3.125
         }} style={{ paddingBottom: "1vh" }}>
-          {items.length > 0 &&
+          {
             <Collapse expandIconPosition={'start'}
               expandIcon={({ isActive }) =>
               (<div style={{ width: 24, height: 24, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -103,7 +92,18 @@ const CallScreen: React.FC<CallScreenProps> = ({
                 flexDirection: 'column',
                 gap: 8
               }}>
-              {items}
+              {userZoomCalls.filter((usz: any) => usz.zoomCall.recordings.length > 0)
+                .sort((a, b) => new Date((b as any).zoomCall.recordings[0].createdAt).getTime() - new Date((a as any).zoomCall.recordings[0].createdAt).getTime()).map(userZoomCall =>
+                  <Collapse.Panel style={{
+                    boxShadow: '0px 2px 8px 0px rgba(24, 28, 48, 0.1)',
+                    borderRadius: 14,
+                  }} key={"" + (userZoomCall as any).id}
+                    header={<PanelHeader userZoomCall={userZoomCall} isMobile={isMobile} />}
+                    extra={<ProcessedSign processed={((userZoomCall as any).zoomCall.recordings[0] as any).processed} />}>
+                    <Box>
+                      <UserZoomCallData userZoomCall={userZoomCall} isMobile={isMobile} />
+                    </Box>
+                  </Collapse.Panel>)}
             </Collapse>}
         </Box>}
       {!isLoaded &&

@@ -12,7 +12,7 @@ import notionLogo from "../../images/notion.svg";
 import googleLogo from "../../images/google.svg";
 import '../../styles/Integrations.css';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, Typography, Theme } from '@mui/material';
+import { Box, Typography, Theme, CircularProgress } from '@mui/material';
 import Menu from '../Menu';
 import { useNavigate } from 'react-router-dom';
 import EndPointProvider from "../../util/EndPointProvider";
@@ -31,6 +31,7 @@ const Integrations: React.FC = () => {
 	const endpoint: string = EndPointProvider.getEndPoint() + "/user/integration";
 	const [integrations, setIntegrations] = useState<UserIntegration[]>([]);
 	const authStore = useContext(AuthContext);
+	let [isLoaded, setIsLoaded] = useState(false);
 
 
 	useEffect(() => {
@@ -41,6 +42,7 @@ const Integrations: React.FC = () => {
 						Authorization: `Bearer ${authStore.token}`
 					}
 				});
+				setIsLoaded(true)
 				setIntegrations(response.data);
 			} catch (error) {
 				console.error("Error fetching user integrations:", error);
@@ -104,7 +106,8 @@ const Integrations: React.FC = () => {
 						mt: isMobile ? '71px' : '55px',
 						mb: isMobile ? 2.5 : '37px'
 					}}>Integrations</Typography>
-					<Box width={isMobile ? '100%' : 320} display='flex' flexDirection='column' gap={isMobile ? 1 : 6}>
+
+					{isLoaded && <Box width={isMobile ? '100%' : 320} display='flex' flexDirection='column' gap={isMobile ? 1 : 6}>
 						<Box display='flex' flexDirection='column' gap={2.5} sx={isMobile ? mobileCSS : {}}>
 							<Typography variant='body1' sx={{
 								color: 'rgba(24, 28, 48, 0.48)',
@@ -146,7 +149,12 @@ const Integrations: React.FC = () => {
 							<CustomIntegration imgSrc={googleLogo} integrationName="Google" clickFunc={onGoogleConnect}
 								integrations={integrations} />
 						</Box>
-					</Box>
+					</Box>}
+					{!isLoaded &&
+						<Box className={"flex-column-container"}>
+							<CircularProgress />
+						</Box>
+					}
 				</Box>
 			</Box>
 		</Box>

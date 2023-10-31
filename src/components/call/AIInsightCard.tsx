@@ -1,6 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 
 export default function AIInsightCard(props: any) {
+  const { isMobile } = props
   let recording = props.recording;
   let fieldName = props.fieldName;
   let split = props.split;
@@ -44,34 +45,34 @@ export default function AIInsightCard(props: any) {
           {!isApplied &&
             <Button color="primary" sx={{
               bgcolor: 'primary.main',
-              borderRadius: 3,
-              px: 2.5,
-              py: 1.25,
+              borderRadius: isMobile ? 5 : 3,
+              px: isMobile ? 4 : 2.5,
+              py: isMobile ? 2 :1.25,
               color: 'white',
               ':hover': {
                 bgcolor: 'primary.light', // theme.palette.primary.main
               },
-              minHeight: 36,
-              maxHeight: 36
+              minHeight: isMobile ? 48 : 36,
+              maxHeight: isMobile ? 48 : 36
             }} onClick={() => showModal(fieldName)}>
-              <Typography variant="body1" color='white'>
+              <Typography variant={isMobile ? "body2" : "body1"} color='white'>
                 Add As Comment
               </Typography>
             </Button>}
           {isApplied &&
             <Button color="primary" sx={{
               bgcolor: 'primary.main',
-              borderRadius: 3,
-              px: 2.5,
-              py: 1.25,
+              borderRadius: isMobile ? 5 : 3,
+              px: isMobile ? 4 : 2.5,
+              py: isMobile ? 2 : 1.25,
               color: 'white',
               ':hover': {
                 bgcolor: 'primary.light', // theme.palette.primary.main
               },
-              minHeight: 36,
-              maxHeight: 36
+              minHeight: isMobile ? 48 : 36,
+              maxHeight: isMobile ? 48 : 36
             }} disabled>
-              <Typography variant="body1" color='white'>
+              <Typography variant={isMobile ? "body2" : "body1"} color='white'>
                 Applied
               </Typography>
             </Button>}
