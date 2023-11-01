@@ -54,7 +54,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
         </Box>}
       </Box >
       {(!isMobile || toggle) && <Box display='flex' flexDirection='column' gap={isMobile ? 4 : 3.5} sx={{ mb: 4 }}>
-        <Box display='flex' mb={isMobile ? 2 : 0} py={1} px={0.5} borderRadius={2.5} alignItems='start'
+        <Box display='flex' mb={0} py={1} px={0.5} borderRadius={2.5} alignItems='start'
           sx={isMobile ? {} : {
             bgcolor: 'rgba(185, 121, 249, 0.08)'
           }}>
@@ -63,7 +63,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
               fill="rgba(185, 121, 249, 1)" />
           </svg>
 
-          <Box ml={0.5}>
+          <Box ml={0.5} display='flex' flexDirection='column' gap={1}>
             <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
               color: "rgba(185, 121, 249, 1)"
             }}>Username</Typography>
@@ -78,7 +78,8 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
             <Box display='flex'>
               <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
                 textDecoration: 'underline',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                lineHeight: '16px'
               }} onClick={handleLogOut}>Log out</Typography>
               <Typography variant={isMobile ? 'body2' : 'body1'}>&nbsp;→</Typography>
             </Box>

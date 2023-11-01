@@ -3,12 +3,7 @@ import axios from "axios";
 import { Collapse } from "antd";
 import UserZoomCallData from "./UserZoomCallData";
 import ProcessedSign from "./ProcessedSign";
-import { Circles } from "react-loader-spinner";
-import EndPointProvider from "../../util/EndPointProvider";
-import AuthContext from "../../store/AuthStore";
 import TimeUtil from "../../util/TimeUtil";
-import ArrowRight from "../../images/arrowright.svg"
-import ArrowDown from "../../images/arrowdown.svg"
 import "../../styles/Main.css";
 import "../../styles/Calls.css";
 import { Box, CircularProgress, Typography } from "@mui/material";
@@ -61,10 +56,6 @@ const CallScreen: React.FC<CallScreenProps> = ({
   userZoomCalls,
   isLoaded
 }) => {
-
-  // let items = userZoomCalls.map(recording => <UserZoomCallData key={(recording as any).id} recording={recording} isMobile={isMobile} />)
-  // items = 
-
 
   return (
     <Box mt={6.875}>

@@ -33,6 +33,7 @@ const theme = createTheme({
       height: '48px',
       maxHeight: '48px',
       minHeight: '48px',
+      boxShadow: '0px 4px 16px 0px rgba(185, 121, 249, 0.32)'
     },
     body1: {
       fontSize: '12px',
@@ -61,21 +62,21 @@ const App: React.FC = () => {
   const code = params.get("code");
   let isClickUpRelocation = code !== null;
 
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setIsAuthenticated(true);
-      let authService = new AuthService(authStore);
-      authService.getProtectedStatus().then(response => {
-        if (response !== 401) {
-        }
-      }).catch(e => {
-        if (e.response.status !== 401) {
-          console.log(e);
-        }
-      });
-    }
-  }, [authStore]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('authToken');
+  //   if (token) {
+  //     setIsAuthenticated(true);
+  //     let authService = new AuthService(authStore);
+  //     authService.getProtectedStatus().then(response => {
+  //       if (response !== 401) {
+  //       }
+  //     }).catch(e => {
+  //       if (e.response.status !== 401) {
+  //         console.log(e);
+  //       }
+  //     });
+  //   }
+  // }, [authStore]);
 
   useEffect(() => {
     if (isClickUpRelocation) {

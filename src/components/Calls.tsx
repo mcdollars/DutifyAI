@@ -38,6 +38,7 @@ const Calls: React.FC = () => {
   useEffect(() => {
     if (!clickUpStore.isRequestInProgress) {
       clickUpStore.setIsRequestInProgress(true)
+      setIsLoaded(false)
       requestRecordings().then(callRecordings => {
         clickUpStore.setIsRequestInProgress(false)
         setIsLoaded(true);
