@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import EndPointProvider from "../../util/EndPointProvider";
 import AuthContext from "../../store/AuthStore";
 import axios from 'axios';
+import ClickUpContext from '../../store/ClickUpStore';
 
 type UserIntegration = {
 	integrationSystem: string,
@@ -31,6 +32,7 @@ const Integrations: React.FC = () => {
 	const endpoint: string = EndPointProvider.getEndPoint() + "/user/integration";
 	const [integrations, setIntegrations] = useState<UserIntegration[]>([]);
 	const authStore = useContext(AuthContext);
+	const clickUpStore = useContext(ClickUpContext)
 	let [isLoaded, setIsLoaded] = useState(false);
 
 
@@ -42,13 +44,19 @@ const Integrations: React.FC = () => {
 						Authorization: `Bearer ${authStore.token}`
 					}
 				});
+				clickUpStore.setIsRequestInProgress(false)
 				setIsLoaded(true)
 				setIntegrations(response.data);
 			} catch (error) {
+				clickUpStore.setIsRequestInProgress(false)
+				setIsLoaded(true)
 				console.error("Error fetching user integrations:", error);
 			}
 		};
-		fetchUserIntegrations();
+		if (!clickUpStore.isRequestInProgress) {
+			clickUpStore.setIsRequestInProgress(true)
+			fetchUserIntegrations();
+		}
 	}, [authStore.token, endpoint]);
 
 	const onClickUpConnect = () => {

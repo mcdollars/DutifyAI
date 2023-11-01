@@ -8,6 +8,7 @@ import axios from "axios";
 import AuthContext from "../store/AuthStore";
 import Menu from './Menu';
 import { useNavigate } from 'react-router-dom';
+import ClickUpContext from '../store/ClickUpStore';
 
 const Calls: React.FC = () => {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ const Calls: React.FC = () => {
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const isSmallerScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down(1000))
   let authStore = useContext(AuthContext);
+  let clickUpStore = useContext(ClickUpContext);
   let [userZoomCalls, setUserZoomCalls] = useState([]);
   let [isLoaded, setIsLoaded] = useState(false);
 
@@ -34,12 +36,16 @@ const Calls: React.FC = () => {
     });
   }
   useEffect(() => {
-    requestRecordings().then(callRecordings => {
-      setIsLoaded(true);
-      if (userZoomCalls.length === 0 && callRecordings.data.length !== 0) {
-        setUserZoomCalls(callRecordings.data);
-      }
-    });
+    if (!clickUpStore.isRequestInProgress) {
+      clickUpStore.setIsRequestInProgress(true)
+      requestRecordings().then(callRecordings => {
+        clickUpStore.setIsRequestInProgress(false)
+        setIsLoaded(true);
+        if (userZoomCalls.length === 0 && callRecordings.data.length !== 0) {
+          setUserZoomCalls(callRecordings.data);
+        }
+      });
+    }
   }, [])
 
   return (
