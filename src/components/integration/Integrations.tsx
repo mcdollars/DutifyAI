@@ -107,7 +107,8 @@ const Integrations: React.FC = () => {
 			<Box flexGrow={1} sx={{
 				height: '100%',
 				minHeight: '100vh',
-				bgcolor: isMobile ? 'rgba(185, 121, 249, 0.08)' : ''
+				bgcolor: isMobile ? 'rgba(185, 121, 249, 0.08)' : '',
+				ml: isMobile ? 0 : isSmallScreen ? '200px' : '304px'
 			}}>
 				<Box p={isMobile ? 2 : 4}>
 					<Typography variant='h3' sx={{

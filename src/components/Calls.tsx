@@ -50,7 +50,7 @@ const Calls: React.FC = () => {
   }, [])
 
   return (
-    <Box display="flex" flexDirection={isMobile ? 'column' : 'row'}>
+    <Box display="flex" flexDirection={isMobile ? 'column' : 'row'} >
       <Menu
         onMenuClick={handleMenuClick}
         selectedMenu={activeMenu}
@@ -65,7 +65,8 @@ const Calls: React.FC = () => {
 
         <Box sx={{
           p: isMobile ? 2 : 4,
-          pr: isMobile ? 2 : isSmallerScreen ? 4 : isSmallScreen ? 29 : 42
+          pr: isMobile ? 2 : isSmallerScreen ? 4 : isSmallScreen ? 29 : 42,
+          ml: isMobile ? 0 : isSmallScreen ? '200px' : '304px'
         }}>
           <CallScreen isMobile={isMobile} userZoomCalls={userZoomCalls} isLoaded={isLoaded} />
         </Box>

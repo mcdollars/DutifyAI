@@ -83,7 +83,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 setError(''); // Clear error message
                 onLoginSuccess();
                 localStorage.setItem('username', username)
-                navigate('/call')
+                const headers = {
+                    headers: {Authorization: `Bearer ${token}`}
+                }
+                axios.get(EndPointProvider.getEndPoint() + "/user/current", headers).then((respon) => {
+                    localStorage.setItem('email', respon.data.email)
+                    navigate('/call')
+                })
+
             }
         } catch (error) {
             setError('Wrong username or password'); // Set error message

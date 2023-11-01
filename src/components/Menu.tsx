@@ -18,6 +18,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
   const navigate = useNavigate()
   const authStore = useContext(AuthContext);
   const username = localStorage.getItem('username')
+  const email = localStorage.getItem('email')
   useEffect(() => {
     if (isMobile) {
       setToggle(false)
@@ -32,7 +33,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
 
   return (
     <Box className="menu-container" sx={{
-      position: isMobile ? 'fixed' : '',
+      position: 'fixed',
       width: isMobile ? '100%' : isSmallScreen ? 200 : 304,
       minWidth: isMobile ? '100%' : isSmallScreen ? 200 : 304,
       px: 2,
@@ -41,7 +42,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
       height: !isMobile ? '100vh' : toggle ? 360 : 64,
       overflow: 'hidden',
       boxShadow: isMobile && toggle ? '0px 2px 8px 0px rgba(24, 28, 48, 0.1)' : '',
-      backgroundColor: toggle ? 'white' : ''
+      backgroundColor: isMobile ? toggle ? 'white' : '' : 'white'
     }} gap={isMobile ? 6 : 4.5}>
       <Box ml={isMobile ? 0 : 0.5} display='flex' justifyContent='space-between'>
         <Box height={32} display='flex' alignItems='center'>
@@ -66,15 +67,15 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
           <Box ml={0.5} display='flex' flexDirection='column' gap={1}>
             <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
               color: "rgba(185, 121, 249, 1)"
-            }}>Username</Typography>
+            }}>{username}</Typography>
             <Typography variant={isMobile ? 'body2' : 'body1'} maxWidth={120}
               sx={isMobile
-                ? { cursor: 'pointer' }
+                ? { }
                 : {
                   overflowWrap: 'break-word',
                   textOverflow: 'ellipsis',
                   overflow: 'hidden',
-                }} className='text-wrap' onClick={() => { if (isMobile) handleLogOut() }}>{username}</Typography>
+                }} className='text-wrap'>{email}</Typography>
             <Box display='flex'>
               <Typography variant={isMobile ? 'body2' : 'body1'} sx={{
                 textDecoration: 'underline',

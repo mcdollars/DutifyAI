@@ -55,7 +55,7 @@ export default function AIInsightCard(props: any) {
               minHeight: isMobile ? 48 : 36,
               maxHeight: isMobile ? 48 : 36
             }} onClick={() => showModal(fieldName)}>
-              <Typography variant={isMobile ? "body2" : "body1"} color='white'>
+              <Typography variant={isMobile ? "body2" : "body1"} color='white' fontWeight={600}>
                 Add As Comment
               </Typography>
             </Button>}
@@ -72,7 +72,7 @@ export default function AIInsightCard(props: any) {
               minHeight: isMobile ? 48 : 36,
               maxHeight: isMobile ? 48 : 36
             }} disabled>
-              <Typography variant={isMobile ? "body2" : "body1"} color='white'>
+              <Typography variant={isMobile ? "body2" : "body1"} color='white' fontWeight={600}>
                 Applied
               </Typography>
             </Button>}
