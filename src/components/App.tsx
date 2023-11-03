@@ -124,7 +124,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer />
-      <BrowserRouter>
+      <BrowserRouter basename='hub'>
         <Routes>
           <Route path='/' element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
           <Route path='/'>
