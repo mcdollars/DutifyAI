@@ -56,27 +56,27 @@ const theme = createTheme({
 const App: React.FC = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const authStore = useContext(AuthContext);
   const endpoint = EndPointProvider.getEndPoint() + "/clickup/oauth/token";
   const code = params.get("code");
   let isClickUpRelocation = code !== null;
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('authToken');
-  //   if (token) {
-  //     setIsAuthenticated(true);
-  //     let authService = new AuthService(authStore);
-  //     authService.getProtectedStatus().then(response => {
-  //       if (response !== 401) {
-  //       }
-  //     }).catch(e => {
-  //       if (e.response.status !== 401) {
-  //         console.log(e);
-  //       }
-  //     });
-  //   }
-  // }, [authStore]);
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      let authService = new AuthService(authStore);
+      authService.getProtectedStatus().then(response => {
+        if (response === 401) {
+          setIsAuthenticated(false)
+        }
+      }).catch(e => {
+        if (e.response.status !== 401) {
+          console.log(e);
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (isClickUpRelocation) {
@@ -108,14 +108,14 @@ const App: React.FC = () => {
   };
 
   const PrivateRoute = ({ children }: { children: any }) => {
-    if (authStore.token) {
+    if (authStore.token && isAuthenticated) {
       return children
     }
     return <Navigate to="/hub/login" />
   }
 
   const BaseRoute = ({ children }: { children: any }) => {
-    if (authStore.token) {
+    if (authStore.token && isAuthenticated) {
       return <Navigate to="/hub/call" />
     }
     return children
