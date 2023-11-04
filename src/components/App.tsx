@@ -111,12 +111,12 @@ const App: React.FC = () => {
     if (authStore.token) {
       return children
     }
-    return <Navigate to="/login" />
+    return <Navigate to="/hub/login" />
   }
 
-  const BaseRoute = ({children}: {children: any}) => {
+  const BaseRoute = ({ children }: { children: any }) => {
     if (authStore.token) {
-      return <Navigate to="/call" />
+      return <Navigate to="/hub/call" />
     }
     return children
   }
@@ -124,10 +124,11 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer />
-      <BrowserRouter basename='hub'>
+      <BrowserRouter>
         <Routes>
-          <Route path='/' element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
-          <Route path='/'>
+          <Route path='/*' element={<Navigate to="/hub" />} />
+          <Route path='/hub'>
+            <Route path=''  element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
             <Route path="call" element={<PrivateRoute><Calls /></PrivateRoute>} />
             <Route path="integration" element={<PrivateRoute><Integrations /></PrivateRoute>} />
             <Route path="login" element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />

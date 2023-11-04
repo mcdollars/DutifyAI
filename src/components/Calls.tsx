@@ -24,7 +24,7 @@ const Calls: React.FC = () => {
   const handleMenuClick = (menu: string) => {
     setActiveMenu(menu);
     if (menu !== "Calls") {
-      navigate(`/integration`)
+      navigate(`/hub/integration`)
     }
   };
 

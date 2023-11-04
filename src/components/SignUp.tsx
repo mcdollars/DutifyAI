@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
                 // localStorage.setItem('authToken', token);
                 // authStore.setToken(token);
                 setError(''); // Clear error message
-                navigate('/signed')
+                navigate('/hub/signed')
             }
         } catch (error) {
             setError('Wrong username or password'); // Set error message
@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
                             color: 'rgba(24, 28, 48, 0.48)',
                             textDecoration: 'underline',
                             cursor: 'pointer'
-                        }} onClick={() => navigate('/login')}>Log in</Typography>
+                        }} onClick={() => navigate('/hub/login')}>Log in</Typography>
                     </Box>
                 </Box>
                 <Box sx={{ width: '100%' }} display='flex' flexDirection='column' gap={2}>

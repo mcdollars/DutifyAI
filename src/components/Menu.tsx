@@ -28,7 +28,7 @@ const Menu: React.FC<MenuProps> = ({ onMenuClick, selectedMenu, isMobile, isSmal
   const handleLogOut = () => {
     localStorage.clear()
     authStore.removeToken()
-    navigate('/login')
+    navigate('/hub/login')
   }
 
   return (

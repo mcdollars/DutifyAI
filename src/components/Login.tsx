@@ -88,7 +88,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 }
                 axios.get(EndPointProvider.getEndPoint() + "/user/current", headers).then((respon) => {
                     localStorage.setItem('email', respon.data.email)
-                    navigate('/call')
+                    navigate('/hub/call')
                 })
 
             }
@@ -121,7 +121,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                             color: 'rgba(24, 28, 48, 0.48)',
                             textDecoration: 'underline',
                             cursor: 'pointer'
-                        }} onClick={() => navigate('/signup')}>Sign up now</Typography>
+                        }} onClick={() => navigate('/hub/signup')}>Sign up now</Typography>
                     </Box>
                 </Box>
                 <Box sx={{ width: '100%' }} display='flex' flexDirection='column' >
