@@ -24,6 +24,8 @@ function ListSelectionModal(props: any) {
                 let workspaces = data.teams;
                 store.setTeams(workspaces);
                 store.setIsRequestInProgress(false);
+            }).catch((error) => {
+                console.log(error)
             });
         }
     }
@@ -32,6 +34,8 @@ function ListSelectionModal(props: any) {
         service.getSpaces(value).then((data:any) => {
             let entityList = data.spaces;
             store.setSpaces(entityList);
+        }).catch((error) => {
+            console.log(error)
         });
         store.setSpaces([])
         store.setFolders([]);
@@ -44,10 +48,14 @@ function ListSelectionModal(props: any) {
         service.getFolders(value).then((data:any) => {
             let entityList = data.folders;
             store.setFolders(entityList);
+        }).catch((error) => {
+            console.log(error)
         });
         service.getFolderlessLists(value).then((data:any) => {
             let entityList = data.lists;
             store.setLists(entityList);
+        }).catch((error) => {
+            console.log(error)
         });
     }
 
@@ -55,6 +63,8 @@ function ListSelectionModal(props: any) {
         service.getListsFromFolder(value).then((data:any) => {
             let entityList = data.lists;
             store.setLists(entityList);
+        }).catch((error) => {
+            console.log(error)
         });
     }
 
@@ -63,6 +73,8 @@ function ListSelectionModal(props: any) {
         service.getTasks(value).then((data:any) => {
            let entityList = data.tasks;
            store.setTasks(entityList);
+        }).catch((error) => {
+            console.log(error)
         });
     }
 

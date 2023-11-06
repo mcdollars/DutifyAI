@@ -41,3 +41,7 @@
 .ant-collapse > .ant-collapse-item {
     background-color: white;
 }
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    align-items: center;
+}

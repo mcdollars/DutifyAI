@@ -89,6 +89,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 axios.get(EndPointProvider.getEndPoint() + "/user/current", headers).then((respon) => {
                     localStorage.setItem('email', respon.data.email)
                     navigate('/hub/call')
+                }).catch((error) => {
+                    console.log(error)
                 })
 
             }

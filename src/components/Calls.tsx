@@ -45,6 +45,8 @@ const Calls: React.FC = () => {
         if (userZoomCalls.length === 0 && callRecordings.data.length !== 0) {
           setUserZoomCalls(callRecordings.data);
         }
+      }).catch((error) => {
+        console.log(error)
       });
     }
   }, [])
