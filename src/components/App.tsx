@@ -71,7 +71,9 @@ const App: React.FC = () => {
           setIsAuthenticated(false)
         }
       }).catch(e => {
-        if (e.response.status !== 401) {
+        if (e.response.status === 401) {
+          setIsAuthenticated(false)
+        } else {
           console.log(e);
         }
       });

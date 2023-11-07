@@ -35,6 +35,7 @@ const Calls: React.FC = () => {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
   useEffect(() => {
     if (!clickUpStore.isRequestInProgress) {
       clickUpStore.setIsRequestInProgress(true)
@@ -46,7 +47,10 @@ const Calls: React.FC = () => {
           setUserZoomCalls(callRecordings.data);
         }
       }).catch((error) => {
-        console.log(error)
+        clickUpStore.setIsRequestInProgress(false)
+        if (error.response.status === 401) {
+          navigate("/hub")
+        }
       });
     }
   }, [])

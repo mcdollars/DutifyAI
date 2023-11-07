@@ -4,8 +4,10 @@ import Toastify from "../../util/Toastify";
 import AuthContext from "../../store/AuthStore";
 import "../../styles/Calls.css";
 import { Button, Box, Typography, withStyles } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangedTask(props: any) {
+  const navigate = useNavigate()
   const {isMobile} = props
   let task = props.task;
   let recordingId = props.recordingId;
@@ -29,7 +31,9 @@ export default function ChangedTask(props: any) {
           Toastify.error('Something Went Wrong!');
         }
       }).catch(error => {
-        console.log(error);
+        if (error.response.status === 401) {
+          navigate("/hub")
+        }
         Toastify.error('Something Went Wrong!');
       })
     } else {
@@ -42,7 +46,9 @@ export default function ChangedTask(props: any) {
           Toastify.error('Something Went Wrong!');
         }
       }).catch(error => {
-        console.log(error);
+        if (error.response.status === 401) {
+          navigate("/hub")
+        }
         Toastify.error('Something Went Wrong!');
       })
     }

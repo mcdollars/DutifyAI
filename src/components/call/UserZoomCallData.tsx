@@ -9,8 +9,10 @@ import ClickUpService from "../../service/clickUpService";
 import Toastify from "../../util/Toastify";
 import AuthContext from "../../store/AuthStore";
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function UserZoomCallData(props: any) {
+  const navigate = useNavigate()
   const { isMobile } = props
   let userZoomCall = props.userZoomCall;
   let recording = userZoomCall.zoomCall.recordings[0];
@@ -53,6 +55,9 @@ export default function UserZoomCallData(props: any) {
       }
     }).catch(error => {
       console.log(error);
+      if (error.response.status === 401) {
+        navigate("/hub")
+      }
       Toastify.error('Something Went Wrong!');
     });
   };
