@@ -47,9 +47,12 @@ const Integrations: React.FC = () => {
 				clickUpStore.setIsRequestInProgress(false)
 				setIsLoaded(true)
 				setIntegrations(response.data);
-			} catch (error) {
+			} catch (error: any) {
 				clickUpStore.setIsRequestInProgress(false)
 				setIsLoaded(true)
+				if (error.response.status === 401) {
+          navigate("/hub")
+        }
 				console.error("Error fetching user integrations:", error);
 			}
 		};
