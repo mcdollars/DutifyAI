@@ -117,7 +117,9 @@ const App: React.FC = () => {
   }
 
   const BaseRoute = ({ children }: { children: any }) => {
-    if (authStore.token && isAuthenticated) {
+    console.log(authStore.token, isAuthenticated)
+    const token = localStorage.getItem("authToken")
+    if (authStore.token && authStore.token === token && isAuthenticated) {
       return <Navigate to="/hub/call" />
     }
     return children
@@ -130,7 +132,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path='/*' element={<Navigate to="/hub" />} />
           <Route path='/hub'>
-            <Route path=''  element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
+            <Route path='' element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />
             <Route path="call" element={<PrivateRoute><Calls /></PrivateRoute>} />
             <Route path="integration" element={<PrivateRoute><Integrations /></PrivateRoute>} />
             <Route path="login" element={<BaseRoute><Login onLoginSuccess={handleLoginSuccess} /></BaseRoute>} />

@@ -51,6 +51,7 @@ const Integrations: React.FC = () => {
 				clickUpStore.setIsRequestInProgress(false)
 				setIsLoaded(true)
 				if (error.response.status === 401) {
+					console.log("-------------I'm here")
           navigate("/hub")
         }
 				console.error("Error fetching user integrations:", error);

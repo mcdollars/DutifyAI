@@ -15,7 +15,7 @@ export default class AuthService {
     }
 
     getProtectedStatus = async () => {
-
+        console.log(this.config, "-----------protected")
         const response = await axios.get(this.endpoint + '/protected', this.config);
 
         return response.status;
